@@ -4,6 +4,7 @@ This file is a part of mrvishal2k2 rename repo
 Dont kang !!!
 © Mrvishal2k2
 '''
+from wserver import keep_alive
 import os, logging
 from root.config import Config
 from logging.handlers import RotatingFileHandler
@@ -49,3 +50,4 @@ class Bot(Client):
         log.info("<<[Bot Stopped]>>")
 
 Bot().run()
+keep_alive()
