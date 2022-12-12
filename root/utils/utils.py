@@ -9,7 +9,7 @@ from shutil import copyfile
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-
+SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 
 async def progress_for_pyrogram(
     current,
@@ -78,25 +78,6 @@ def TimeFormatter(milliseconds: int) -> str:
           ((str(seconds) + " sec, ") if seconds else "") + \
           ((str(milliseconds) + " millisec, ") if milliseconds else "")
     return tmp[:-2]
-
-#def TimeFormatter(milliseconds: int) -> str:
-    #result = ""
-    #v_m = 0
-    #remainder = milliseconds
-    #r_ange_s = {
-        #"d, ": (24 * 60 * 60 * 1000),
-        #"h, ": (60 * 60 * 1000),
-        #"m, ": (60 * 1000),
-        #"s, ": (1 * 1000),
-        #"ms ": 1,
-    #}
-    #for age in r_ange_s:
-        #divisor = r_ange_s[age]
-        #v_m, remainder = divmod(remainder, divisor)
-        #v_m = int(v_m)
-        #if v_m != 0:
-            #result += f" {v_m} {age} "
-    #return result
 
 
 ################# Other Utils
@@ -171,3 +152,33 @@ async def cult_small_video(video_file, out_put_file_name, start_time, end_time):
     t_response = stdout.decode().strip()
     logger.info(t_response)
     return out_put_file_name
+
+def get_readable_file_size(size_in_bytes) -> str:
+    if size_in_bytes is None:
+        return "0B"
+    index = 0
+    while size_in_bytes >= 1024:
+        size_in_bytes /= 1024
+        index += 1
+    try:
+        return f"{round(size_in_bytes, 2)}{SIZE_UNITS[index]}"
+    except IndexError:
+        return "File too large"
+
+def get_readable_time(seconds: int) -> str:
+    result = ""
+    (days, remainder) = divmod(seconds, 86400)
+    days = int(days)
+    if days != 0:
+        result += f"{days}d"
+    (hours, remainder) = divmod(remainder, 3600)
+    hours = int(hours)
+    if hours != 0:
+        result += f"{hours}h"
+    (minutes, seconds) = divmod(remainder, 60)
+    minutes = int(minutes)
+    if minutes != 0:
+        result += f"{minutes}m"
+    seconds = int(seconds)
+    result += f"{seconds}s"
+    return result
