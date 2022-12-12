@@ -24,12 +24,12 @@ async def rename_filter(c,m):
     button = []
     try:
       filename = media.file_name
-      text += f"FileName:\n{filename}\n"
+      text += f"FileName: {filename}\n\n"
     except:
     # some files dont gib name ..
       filename = None 
     
-    text += "Select the desired Option"
+    text += "Select the desired Option\n"
     button.append([InlineKeyboardButton("Rename as File", callback_data="rename_file")])
     # Thanks to albert for mime_type suggestion 
     if media.mime_type.startswith("video/"):
