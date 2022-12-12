@@ -1,7 +1,7 @@
 import math
 import time
 import asyncio
-import bot
+#import bot
 from typing import Union
 from pyrogram.types import Message, CallbackQuery
 from pyrogram.errors import FloodWait
