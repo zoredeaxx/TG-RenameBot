@@ -67,25 +67,36 @@ def humanbytes(size):
         n += 1
     return str(round(size, 2)) + " " + Dic_powerN[n] + 'B'
 
-
 def TimeFormatter(milliseconds: int) -> str:
-    result = ""
-    v_m = 0
-    remainder = milliseconds
-    r_ange_s = {
-        "d, ": (24 * 60 * 60 * 1000),
-        "h, ": (60 * 60 * 1000),
-        "m, ": (60 * 1000),
-        "s, ": (1 * 1000),
-        "ms ": 1,
-    }
-    for age in r_ange_s:
-        divisor = r_ange_s[age]
-        v_m, remainder = divmod(remainder, divisor)
-        v_m = int(v_m)
-        if v_m != 0:
-            result += f" {v_m} {age} "
-    return result
+    seconds, milliseconds = divmod(int(milliseconds), 1000)
+    minutes, seconds = divmod(seconds, 60)
+    hours, minutes = divmod(minutes, 60)
+    days, hours = divmod(hours, 24)
+    tmp = ((str(days) + " days, ") if days else "") + \
+          ((str(hours) + " hours, ") if hours else "") + \
+          ((str(minutes) + " min, ") if minutes else "") + \
+          ((str(seconds) + " sec, ") if seconds else "") + \
+          ((str(milliseconds) + " millisec, ") if milliseconds else "")
+    return tmp[:-2]
+
+#def TimeFormatter(milliseconds: int) -> str:
+    #result = ""
+    #v_m = 0
+    #remainder = milliseconds
+    #r_ange_s = {
+        #"d, ": (24 * 60 * 60 * 1000),
+        #"h, ": (60 * 60 * 1000),
+        #"m, ": (60 * 1000),
+        #"s, ": (1 * 1000),
+        #"ms ": 1,
+    #}
+    #for age in r_ange_s:
+        #divisor = r_ange_s[age]
+        #v_m, remainder = divmod(remainder, divisor)
+        #v_m = int(v_m)
+        #if v_m != 0:
+            #result += f" {v_m} {age} "
+    #return result
 
 
 ################# Other Utils
