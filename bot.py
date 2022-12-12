@@ -44,7 +44,6 @@ class Bot(Client):
     async def start(self):
         await super().start()
         os.makedirs(Config.DOWNLOAD_LOCATION,exist_ok=True)
-        self.send_message(chat_id=int(Config.OWNER_ID), text="<b>Bot Started!</b>") 
         log.info("<<[Bot Started]>>")
     async def stop(self, *args):
         await super().stop()
