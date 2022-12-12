@@ -9,7 +9,6 @@ from shutil import copyfile
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-SIZE_UNITS = ["B", "KB", "MB", "GB", "TB", "PB"]
 
 async def progress_for_pyrogram(
     current,
@@ -152,33 +151,3 @@ async def cult_small_video(video_file, out_put_file_name, start_time, end_time):
     t_response = stdout.decode().strip()
     logger.info(t_response)
     return out_put_file_name
-
-def get_readable_file_size(size_in_bytes) -> str:
-    if size_in_bytes is None:
-        return "0B"
-    index = 0
-    while size_in_bytes >= 1024:
-        size_in_bytes /= 1024
-        index += 1
-    try:
-        return f"{round(size_in_bytes, 2)}{SIZE_UNITS[index]}"
-    except IndexError:
-        return "File too large"
-
-def get_readable_time(seconds: int) -> str:
-    result = ""
-    (days, remainder) = divmod(seconds, 86400)
-    days = int(days)
-    if days != 0:
-        result += f"{days}d"
-    (hours, remainder) = divmod(remainder, 3600)
-    hours = int(hours)
-    if hours != 0:
-        result += f"{hours}h"
-    (minutes, seconds) = divmod(remainder, 60)
-    minutes = int(minutes)
-    if minutes != 0:
-        result += f"{minutes}m"
-    seconds = int(seconds)
-    result += f"{seconds}s"
-    return result
