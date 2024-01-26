@@ -1,5 +1,5 @@
 # for functioning
-pyrogram==2.0.30
+pyrogram==2.0.80
 tgcrypto
 requests
 flask
