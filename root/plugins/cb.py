@@ -86,7 +86,7 @@ async def renamer(c,m,as_file=False):
   if downloaded_file is None:
     return await d_msg.edit_text(Translation.DOWNLOAD_FAIL_MSG)
 
-  new_file_name = d_location + new_f_name + "." + extension
+  new_file_name = d_location + new_f_name #+ "." + extension
   os.rename(downloaded_file,new_file_name)
 
   try:
