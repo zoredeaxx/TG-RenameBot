@@ -6,7 +6,8 @@ Dont kang !!!
 © Mrvishal2k2
 """
 import os
-
+from dotenv import load_dotenv
+load_dotenv("config.env")
 
 class Config(object):
     APP_ID = int(os.environ.get("APP_ID"))
