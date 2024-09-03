@@ -6,7 +6,8 @@ from root.messages import Translation
 import shutil
 import time
 import psutil
-from utils.utils import get_readable_file_size, get_readable_time
+from root.utils import *
+#from root.utils.utils import get_readable_file_size, get_readable_time
  
 botStartTime = time.time()
 log = logging.getLogger(__name__)
