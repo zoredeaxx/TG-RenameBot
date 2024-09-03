@@ -3,6 +3,7 @@ pyrogram==2.0.80
 tgcrypto
 requests
 flask
+python-dotenv
 
 # to get thumb...
 hachoir
